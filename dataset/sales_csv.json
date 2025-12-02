@@ -1,5 +1,5 @@
 {
-	"name": "sales",
+	"name": "sales_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sa_raw_ventas_apple",

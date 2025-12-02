@@ -9,7 +9,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "category",
+						"referenceName": "category_csv",
 						"type": "DatasetReference"
 					},
 					"name": "source1"

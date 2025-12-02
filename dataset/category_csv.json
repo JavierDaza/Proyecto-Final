@@ -1,5 +1,5 @@
 {
-	"name": "category",
+	"name": "category_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sa_raw_ventas_apple",
