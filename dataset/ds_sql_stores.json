@@ -12,23 +12,23 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "STORE_ID",
+				"name": "Store_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "STORE_NAME",
+				"name": "Store_Name",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CITY",
+				"name": "City",
 				"type": "nvarchar"
 			},
 			{
-				"name": "COUNTRY",
+				"name": "Country",
 				"type": "nvarchar"
 			},
 			{
-				"name": "OPENED",
+				"name": "opened",
 				"type": "nvarchar"
 			}
 		],

@@ -12,15 +12,15 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "CATEGORY_ID",
+				"name": "category_id",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CATEGORY_NAME",
+				"name": "category_name",
 				"type": "nvarchar"
 			},
 			{
-				"name": "EXTRA_NOTE",
+				"name": "extra_note",
 				"type": "nvarchar"
 			}
 		],

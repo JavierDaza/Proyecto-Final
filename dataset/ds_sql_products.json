@@ -12,27 +12,27 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "PRODUCT_ID",
+				"name": "Product_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PRODUCT_NAME",
+				"name": "Product_Name",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CATEGORY_ID",
+				"name": "Category_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "LAUNCH_DATE",
+				"name": "Launch_Date",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PRICE",
+				"name": "Price",
 				"type": "nvarchar"
 			},
 			{
-				"name": "NOTES",
+				"name": "notes",
 				"type": "nvarchar"
 			}
 		],
