@@ -1,0 +1,32 @@
+{
+	"name": "ds_sql_category",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CATEGORY_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EXTRA_NOTE",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "BRONZE",
+			"table": "CATEGORY"
+		}
+	}
+}

@@ -27,9 +27,9 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          CATEGORY_ID as string,",
-				"          CATEGORY_NAME as string,",
-				"          EXTRA_NOTE as string",
+				"          category_id as string,",
+				"          category_name as string,",
+				"          extra_note as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -37,9 +37,9 @@
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          category_id as string,",
-				"          category_name as string,",
-				"          extra_note as string",
+				"          CATEGORY_ID as string,",
+				"          CATEGORY_NAME as string,",
+				"          EXTRA_NOTE as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -48,7 +48,12 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CATEGORY_ID = category_id,",
+				"          CATEGORY_NAME = category_name,",
+				"          EXTRA_NOTE = extra_note",
+				"     )) ~> sink1"
 			]
 		}
 	}
