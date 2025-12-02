@@ -1,0 +1,40 @@
+{
+	"name": "ds_sql_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SALE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SALE_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "BRONZE",
+			"table": "VENTAS"
+		}
+	}
+}

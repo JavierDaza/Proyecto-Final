@@ -1,0 +1,36 @@
+{
+	"name": "ds_sql_warranty",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CLAIM_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLAIM_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SALE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REPAIR_STATUS",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "BRONZE",
+			"table": "GARANTIAS"
+		}
+	}
+}

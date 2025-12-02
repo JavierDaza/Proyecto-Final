@@ -1,0 +1,44 @@
+{
+	"name": "ds_sql_products",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Bronze"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAUNCH_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRICE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NOTES",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "BRONZE",
+			"table": "PRODUCTOS"
+		}
+	}
+}
