@@ -27,9 +27,9 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          category_id as string,",
-				"          category_name as string,",
-				"          extra_note as string",
+				"          CATEGORY_ID as string,",
+				"          CATEGORY_NAME as string,",
+				"          EXTRA_NOTE as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",

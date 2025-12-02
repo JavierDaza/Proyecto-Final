@@ -8,30 +8,14 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "ds_sql_category",
-						"type": "DatasetReference"
-					},
 					"name": "source1"
 				}
 			],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "derivedColumn1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          CATEGORY_ID as string,",
-				"          CATEGORY_NAME as string,",
-				"          EXTRA_NOTE as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1",
-				"source1 derive(EXTRA_NOTE = trim(EXTRA_NOTE, replace(EXTRA_NOTE, '', 'NONE'))) ~> derivedColumn1"
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1"
 			]
 		}
 	}

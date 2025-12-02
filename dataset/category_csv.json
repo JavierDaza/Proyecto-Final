@@ -23,15 +23,15 @@
 		},
 		"schema": [
 			{
-				"name": "category_id",
+				"name": "CATEGORY_ID",
 				"type": "String"
 			},
 			{
-				"name": "category_name",
+				"name": "CATEGORY_NAME",
 				"type": "String"
 			},
 			{
-				"name": "extra_note",
+				"name": "EXTRA_NOTE",
 				"type": "String"
 			}
 		]
