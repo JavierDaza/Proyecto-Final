@@ -1,0 +1,54 @@
+{
+	"name": "ds_sql_silver_stores",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Silver"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "STORE_SK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CITY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COUNTRY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OPENED_YEAR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IS_DUPLICATE",
+				"type": "bit"
+			},
+			{
+				"name": "QUALITY_FLAGS",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "SILVER",
+			"table": "STORES"
+		}
+	}
+}

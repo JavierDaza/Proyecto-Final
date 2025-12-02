@@ -1,0 +1,41 @@
+{
+	"name": "ds_sql_silver_category",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Silver"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CATEGORY_SK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CATEGORY_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EXTRA_NOTE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IS_DUPLICATE",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "SILVER",
+			"table": "CATEGORY"
+		}
+	}
+}

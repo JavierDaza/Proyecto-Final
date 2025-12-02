@@ -1,0 +1,47 @@
+{
+	"name": "ds_sql_silver_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Silver"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SALE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SALE_DATE",
+				"type": "date"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "REVENUE",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "SILVER",
+			"table": "SALES"
+		}
+	}
+}

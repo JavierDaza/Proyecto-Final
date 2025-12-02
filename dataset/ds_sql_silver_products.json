@@ -1,0 +1,55 @@
+{
+	"name": "ds_sql_silver_products",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_raw_ventas_apple",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Silver"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PRODUCT_SK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAUNCH_DATE",
+				"type": "date"
+			},
+			{
+				"name": "PRICE",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "NOTES",
+				"type": "nvarchar"
+			},
+			{
+				"name": "QUALITY_FLAGS",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "SILVER",
+			"table": "PRODUCTS"
+		}
+	}
+}
