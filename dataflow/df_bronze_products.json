@@ -1,5 +1,5 @@
 {
-	"name": "df_bronze_category",
+	"name": "df_bronze_products",
 	"properties": {
 		"folder": {
 			"name": "Bronze"
@@ -9,7 +9,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "category_csv",
+						"referenceName": "products_csv",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -18,7 +18,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_category",
+						"referenceName": "ds_sql_products",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -27,9 +27,12 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          category_id as string,",
-				"          category_name as string,",
-				"          extra_note as string",
+				"          Product_ID as string,",
+				"          Product_Name as string,",
+				"          Category_ID as string,",
+				"          Launch_Date as string,",
+				"          Price as string,",
+				"          notes as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -37,9 +40,12 @@
 				"source1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
+				"          PRODUCT_ID as string,",
+				"          PRODUCT_NAME as string,",
 				"          CATEGORY_ID as string,",
-				"          CATEGORY_NAME as string,",
-				"          EXTRA_NOTE as string",
+				"          LAUNCH_DATE as string,",
+				"          PRICE as string,",
+				"          NOTES as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
