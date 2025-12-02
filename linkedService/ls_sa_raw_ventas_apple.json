@@ -6,7 +6,7 @@
 		"type": "AzureBlobStorage",
 		"typeProperties": {
 			"connectionString": "DefaultEndpointsProtocol=https;AccountName=saucbventasapple7875588;EndpointSuffix=core.windows.net;",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEI5MzIwRUZBLUEyMDMtNDNERi05REUwLUE5RUMyQzYzQkM2NV8yY2RiZTk4Ni1mMWI5LTQwMWItODM1OS0yMmRkYjRmNjMyN2MiDQp9"
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEI5MzIwRUZBLUEyMDMtNDNERi05REUwLUE5RUMyQzYzQkM2NV9hOWM4MjE3Yi1jMjRjLTQ0YTUtODg2Mi03YWM5MDUyZjgwOWQiDQp9"
 		}
 	}
 }
