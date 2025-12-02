@@ -16,7 +16,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          category_id as string,",
@@ -26,7 +33,13 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source1"
+				"     format: 'table') ~> source1",
+				"derivedColumn2 derive(extra_note = iif(isNull(extra_note) || length(trim(extra_note)) == 0, 'N/A', extra_note),",
+				"          category_id = replace(replace(category_id, 'cat', 'CAT'), '', 'CAT'),",
+				"          category_name = iif(length(trim(category_name)) == 0, 'N/A', trim(category_name))) ~> derivedColumn1",
+				"source1 derive(category_id = iif(isNull(category_id), split(category_name, ' ')[1], category_id),",
+				"          category_name = iif(isNull(category_id), 'Missing Name', category_name),",
+				"          extra_note = iif(isNull(category_id), split(category_name, ' ')[2], extra_note)) ~> derivedColumn2"
 			]
 		}
 	}
