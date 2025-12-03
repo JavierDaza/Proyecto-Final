@@ -1,5 +1,5 @@
 {
-	"name": "ds_sql_gold_store",
+	"name": "ds_sql_gold_warranty",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sql_raw_ventas_apple",
@@ -12,26 +12,22 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "CATEGORY_KEY",
+				"name": "warranty_id",
+				"type": "varchar"
+			},
+			{
+				"name": "warranty_type",
+				"type": "varchar"
+			},
+			{
+				"name": "duration_months",
 				"type": "int",
 				"precision": 10
-			},
-			{
-				"name": "CATEGORY_ID",
-				"type": "nvarchar"
-			},
-			{
-				"name": "CATEGORY_NAME",
-				"type": "nvarchar"
-			},
-			{
-				"name": "EXTRA_NOTE",
-				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "dim_store"
+			"table": "dim_warranty"
 		}
 	}
 }

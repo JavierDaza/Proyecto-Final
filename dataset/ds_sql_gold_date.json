@@ -1,5 +1,5 @@
 {
-	"name": "ds_sql_gold_store",
+	"name": "ds_sql_gold_date",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sql_raw_ventas_apple",
@@ -12,26 +12,37 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "CATEGORY_KEY",
+				"name": "date_id",
+				"type": "date"
+			},
+			{
+				"name": "full_date",
+				"type": "date"
+			},
+			{
+				"name": "day",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "CATEGORY_ID",
-				"type": "nvarchar"
+				"name": "month",
+				"type": "int",
+				"precision": 10
 			},
 			{
-				"name": "CATEGORY_NAME",
-				"type": "nvarchar"
+				"name": "quarter",
+				"type": "int",
+				"precision": 10
 			},
 			{
-				"name": "EXTRA_NOTE",
-				"type": "nvarchar"
+				"name": "year",
+				"type": "int",
+				"precision": 10
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "dim_store"
+			"table": "dim_date"
 		}
 	}
 }

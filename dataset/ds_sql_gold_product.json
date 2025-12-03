@@ -1,5 +1,5 @@
 {
-	"name": "ds_sql_gold_store",
+	"name": "ds_sql_gold_product",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sql_raw_ventas_apple",
@@ -12,26 +12,26 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "CATEGORY_KEY",
-				"type": "int",
-				"precision": 10
+				"name": "product_id",
+				"type": "varchar"
 			},
 			{
-				"name": "CATEGORY_ID",
-				"type": "nvarchar"
+				"name": "product_name",
+				"type": "varchar"
 			},
 			{
-				"name": "CATEGORY_NAME",
-				"type": "nvarchar"
+				"name": "category",
+				"type": "varchar"
 			},
 			{
-				"name": "EXTRA_NOTE",
-				"type": "nvarchar"
+				"name": "unit_price",
+				"type": "float",
+				"precision": 15
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "dim_store"
+			"table": "dim_product"
 		}
 	}
 }
