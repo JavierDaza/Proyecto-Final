@@ -64,7 +64,14 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          SALE_ID = sale_id,",
+				"          PRODUCT_ID = product_id,",
+				"          STORE_ID = store_id,",
+				"          SALE_DATE = sale_date,",
+				"          QUANTITY = quantity",
+				"     )) ~> sink1"
 			]
 		}
 	}

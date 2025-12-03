@@ -27,6 +27,15 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -44,8 +53,28 @@
 				"     format: 'table') ~> source1",
 				"source1 derive(notes = coalesce(notes, 'N/A'),",
 				"          Category_ID = coalesce(Category_ID, 'N/A'),",
-				"          Launch_Date = coalesce(     toDate(trim(Launch_Date),'dd/MM/yyyy'),             toDate(replace(trim(Launch_Date),'.','-'),'yyyy-MM-dd'),     toDate(trim(Launch_Date),'MM-dd-yyyy'),     toDate(trim(Launch_Date),'yyyy-MM-dd'),     toDate(trim(Launch_Date),'MMM dd yyyy'),     toDate('','yyyy-MM-dd')   /* null tipado */ )) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"          Launch_Date = coalesce(\r",
+				"    toDate(trim(Launch_Date), 'yyyy-MM-dd'), \r",
+				"    toDate(trim(Launch_Date), 'dd/MM/yyyy'),\r",
+				"    toDate(trim(Launch_Date), 'yyyy/MM/dd'), \r",
+				"    toDate('1900-01-01', 'yyyy-MM-dd')  \r",
+				"),",
+				"          Price = replace(Price, '$', '')) ~> derivedColumn1",
+				"derivedColumn2 cast(output(",
+				"          Price as decimal(10,0)",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"derivedColumn1 derive(Price = replace(Price, 'one thousand seven hundred sixty one', '1761')) ~> derivedColumn2",
+				"cast1 select(mapColumn(",
+				"          Product_ID,",
+				"          Product_Name,",
+				"          Category_ID,",
+				"          Launch_Date,",
+				"          Price",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          PRODUCT_ID as string,",
@@ -62,7 +91,15 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PRODUCT_ID = Product_ID,",
+				"          PRODUCT_NAME = Product_Name,",
+				"          CATEGORY_ID = Category_ID,",
+				"          LAUNCH_DATE = Launch_Date,",
+				"          PRICE = Price,",
+				"          NOTES = notes",
+				"     )) ~> sink1"
 			]
 		}
 	}

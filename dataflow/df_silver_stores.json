@@ -1,0 +1,82 @@
+{
+	"name": "df_silver_stores",
+	"properties": {
+		"folder": {
+			"name": "Silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_stores",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_silver_stores",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Store_ID as string,",
+				"          Store_Name as string,",
+				"          City as string,",
+				"          Country as string,",
+				"          opened as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 derive(Store_Name = replace(replace(Store_Name, '\"', ''), \"'\", ''),",
+				"          Country = trim(Country),",
+				"          opened = iif(isNull(opened) || trim(opened) == '', 'Desconocido', opened)) ~> derivedColumn1",
+				"derivedColumn1 derive(Country = iif(isNull(Country) || trim(Country) == '', 'Desconocido', Country),",
+				"          City = iif(isNull(City) || trim(City) == '', 'Desconocido', City)) ~> derivedColumn2",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          STORE_SK as integer,",
+				"          STORE_ID as string,",
+				"          STORE_NAME as string,",
+				"          CITY as string,",
+				"          COUNTRY as string,",
+				"          OPENED_YEAR as integer,",
+				"          IS_DUPLICATE as boolean,",
+				"          QUALITY_FLAGS as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          STORE_ID = Store_ID,",
+				"          STORE_NAME = Store_Name,",
+				"          CITY = City,",
+				"          COUNTRY = Country,",
+				"          OPENED_YEAR = opened",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
