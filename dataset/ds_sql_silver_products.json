@@ -12,11 +12,6 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "PRODUCT_SK",
-				"type": "int",
-				"precision": 10
-			},
-			{
 				"name": "PRODUCT_ID",
 				"type": "nvarchar"
 			},
@@ -40,10 +35,6 @@
 			},
 			{
 				"name": "NOTES",
-				"type": "nvarchar"
-			},
-			{
-				"name": "QUALITY_FLAGS",
 				"type": "nvarchar"
 			}
 		],

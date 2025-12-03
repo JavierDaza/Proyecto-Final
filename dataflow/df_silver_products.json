@@ -1,0 +1,69 @@
+{
+	"name": "df_silver_products",
+	"properties": {
+		"folder": {
+			"name": "Silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_products",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_silver_products",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Product_ID as string,",
+				"          Product_Name as string,",
+				"          Category_ID as string,",
+				"          Launch_Date as string,",
+				"          Price as string,",
+				"          notes as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 derive(notes = coalesce(notes, 'N/A'),",
+				"          Category_ID = coalesce(Category_ID, 'N/A'),",
+				"          Launch_Date = coalesce(     toDate(trim(Launch_Date),'dd/MM/yyyy'),             toDate(replace(trim(Launch_Date),'.','-'),'yyyy-MM-dd'),     toDate(trim(Launch_Date),'MM-dd-yyyy'),     toDate(trim(Launch_Date),'yyyy-MM-dd'),     toDate(trim(Launch_Date),'MMM dd yyyy'),     toDate('','yyyy-MM-dd')   /* null tipado */ )) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PRODUCT_ID as string,",
+				"          PRODUCT_NAME as string,",
+				"          CATEGORY_ID as string,",
+				"          LAUNCH_DATE as date,",
+				"          PRICE as decimal(12,2),",
+				"          NOTES as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}

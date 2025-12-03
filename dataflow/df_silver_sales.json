@@ -1,0 +1,71 @@
+{
+	"name": "df_silver_sales",
+	"properties": {
+		"folder": {
+			"name": "Silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_sales",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_silver_sales",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          sale_id as string,",
+				"          sale_date as string,",
+				"          store_id as string,",
+				"          product_id as string,",
+				"          quantity as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 derive(sale_date = coalesce(\r",
+				"    toDate(trim(sale_date), 'dd-MM-yyyy'),  \r",
+				"    toDate(trim(sale_date), 'MM-dd-yyyy'),   \r",
+				"    toDate(trim(sale_date), 'yyyy-MM-dd'), \r",
+				"    toDate(trim(sale_date), 'dd/MM/yyyy'),  \r",
+				"    toDate('1900-01-01', 'yyyy-MM-dd'))) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SALE_ID as string,",
+				"          PRODUCT_ID as string,",
+				"          STORE_ID as string,",
+				"          SALE_DATE as date,",
+				"          QUANTITY as integer,",
+				"          REVENUE as decimal(14,2)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
