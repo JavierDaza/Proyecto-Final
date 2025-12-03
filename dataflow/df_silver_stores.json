@@ -52,14 +52,11 @@
 				"derivedColumn2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          STORE_SK as integer,",
 				"          STORE_ID as string,",
 				"          STORE_NAME as string,",
 				"          CITY as string,",
 				"          COUNTRY as string,",
-				"          OPENED_YEAR as integer,",
-				"          IS_DUPLICATE as boolean,",
-				"          QUALITY_FLAGS as string",
+				"          OPENED as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -74,7 +71,7 @@
 				"          STORE_NAME = Store_Name,",
 				"          CITY = City,",
 				"          COUNTRY = Country,",
-				"          OPENED_YEAR = opened",
+				"          OPENED = opened",
 				"     )) ~> sink1"
 			]
 		}

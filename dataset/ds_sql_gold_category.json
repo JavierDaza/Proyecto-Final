@@ -1,40 +1,37 @@
 {
-	"name": "ds_sql_silver_stores",
+	"name": "ds_sql_gold_category",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sql_raw_ventas_apple",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Silver"
+			"name": "Gold"
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "STORE_ID",
+				"name": "CATEGORY_KEY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CATEGORY_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "STORE_NAME",
+				"name": "CATEGORY_NAME",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CITY",
-				"type": "nvarchar"
-			},
-			{
-				"name": "COUNTRY",
-				"type": "nvarchar"
-			},
-			{
-				"name": "OPENED",
+				"name": "EXTRA_NOTE",
 				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
-			"schema": "SILVER",
-			"table": "STORES"
+			"schema": "GOLD",
+			"table": "DIM_CATEGORY"
 		}
 	}
 }

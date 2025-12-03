@@ -1,0 +1,52 @@
+{
+	"name": "df_silver_warranty",
+	"properties": {
+		"folder": {
+			"name": "Silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_warranty",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "cast1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          claim_id as string,",
+				"          claim_date as string,",
+				"          sale_id as string,",
+				"          repair_status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"cast1 derive(CASE_DATE = coalesce(\r",
+				"    toDate(trim(claim_date), 'dd-MM-yyyy'),  \r",
+				"    toDate(trim(claim_date), 'MM-dd-yyyy'),   \r",
+				"    toDate(trim(claim_date), 'yyyy-MM-dd'), \r",
+				"    toDate(trim(claim_date), 'dd/MM/yyyy'),  \r",
+				"    toDate('1900-01-01', 'yyyy-MM-dd')),",
+				"          sale_id = replace(sale_id, '', 'Desconocido')) ~> derivedColumn1",
+				"source1 cast(output(",
+				"          claim_id as string",
+				"     ),",
+				"     errors: true) ~> cast1"
+			]
+		}
+	}
+}
