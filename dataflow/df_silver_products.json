@@ -97,8 +97,7 @@
 				"          PRODUCT_NAME = Product_Name,",
 				"          CATEGORY_ID = Category_ID,",
 				"          LAUNCH_DATE = Launch_Date,",
-				"          PRICE = Price,",
-				"          NOTES = notes",
+				"          PRICE = Price",
 				"     )) ~> sink1"
 			]
 		}

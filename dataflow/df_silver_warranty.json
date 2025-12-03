@@ -15,7 +15,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_silver_warranty",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "derivedColumn1"
@@ -41,11 +49,33 @@
 				"    toDate(trim(claim_date), 'yyyy-MM-dd'), \r",
 				"    toDate(trim(claim_date), 'dd/MM/yyyy'),  \r",
 				"    toDate('1900-01-01', 'yyyy-MM-dd')),",
-				"          sale_id = replace(sale_id, '', 'Desconocido')) ~> derivedColumn1",
+				"          sale_id = iif(length(trim(sale_id)) == 0, 'N/A', trim(sale_id))) ~> derivedColumn1",
 				"source1 cast(output(",
 				"          claim_id as string",
 				"     ),",
-				"     errors: true) ~> cast1"
+				"     errors: true) ~> cast1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CLAIM_ID as string,",
+				"          CLAIM_DATE as string,",
+				"          SALE_ID as string,",
+				"          REPAIR_STATUS as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CLAIM_ID = claim_id,",
+				"          CLAIM_DATE = claim_date,",
+				"          SALE_ID = sale_id,",
+				"          REPAIR_STATUS = repair_status",
+				"     )) ~> sink1"
 			]
 		}
 	}

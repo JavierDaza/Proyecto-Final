@@ -12,19 +12,19 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "WARRANTY_ID",
+				"name": "CLAIM_ID",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PRODUCT_ID",
+				"name": "CLAIM_DATE",
 				"type": "nvarchar"
 			},
 			{
-				"name": "CASE_DATE",
-				"type": "date"
+				"name": "SALE_ID",
+				"type": "nvarchar"
 			},
 			{
-				"name": "CASE_TYPE",
+				"name": "REPAIR_STATUS",
 				"type": "nvarchar"
 			}
 		],
