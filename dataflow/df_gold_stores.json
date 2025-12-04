@@ -1,5 +1,5 @@
 {
-	"name": "df_gold_date",
+	"name": "df_gold_stores",
 	"properties": {
 		"folder": {
 			"name": "Gold"
@@ -9,10 +9,10 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_silver_products",
+						"referenceName": "ds_sql_silver_stores",
 						"type": "DatasetReference"
 					},
-					"name": "Products"
+					"name": "Stores"
 				},
 				{
 					"dataset": {
@@ -20,19 +20,12 @@
 						"type": "DatasetReference"
 					},
 					"name": "Sales"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_sql_silver_warranty",
-						"type": "DatasetReference"
-					},
-					"name": "Warranty"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_gold_date",
+						"referenceName": "ds_sql_gold_store",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -46,28 +39,21 @@
 					"name": "select2"
 				},
 				{
-					"name": "select3"
-				},
-				{
 					"name": "union1"
-				},
-				{
-					"name": "cast2"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          PRODUCT_ID as string,",
-				"          PRODUCT_NAME as string,",
-				"          CATEGORY_ID as string,",
-				"          LAUNCH_DATE as date,",
-				"          PRICE as decimal(12,2),",
-				"          NOTES as string",
+				"          STORE_ID as string,",
+				"          STORE_NAME as string,",
+				"          CITY as string,",
+				"          COUNTRY as string,",
+				"          OPENED as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Products",
+				"     format: 'table') ~> Stores",
 				"source(output(",
 				"          SALE_ID as string,",
 				"          PRODUCT_ID as string,",
@@ -80,45 +66,24 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Sales",
-				"source(output(",
-				"          CLAIM_ID as string,",
-				"          CLAIM_DATE as string,",
-				"          SALE_ID as string,",
-				"          REPAIR_STATUS as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Warranty",
-				"Products select(mapColumn(",
-				"          SALE_DATE = LAUNCH_DATE",
+				"Stores select(mapColumn(",
+				"          STORE_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"Sales select(mapColumn(",
-				"          SALE_DATE",
+				"          STORE_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"cast2 select(mapColumn(",
-				"          SALE_DATE = CLAIM_DATE",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3",
-				"select1, select2, select3 union(byName: true)~> union1",
-				"Warranty cast(output(",
-				"          CLAIM_DATE as date 'yyyy-MM-dd'",
-				"     ),",
-				"     errors: true) ~> cast2",
+				"select1, select2 union(byName: true)~> union1",
 				"union1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          date_id as date,",
-				"          full_date as date,",
-				"          day as integer,",
-				"          month as integer,",
-				"          quarter as integer,",
-				"          year as integer",
+				"          CATEGORY_KEY as integer,",
+				"          CATEGORY_ID as string,",
+				"          CATEGORY_NAME as string,",
+				"          EXTRA_NOTE as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",

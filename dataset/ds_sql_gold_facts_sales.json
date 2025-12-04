@@ -1,5 +1,5 @@
 {
-	"name": "ds_sql_gold_sales",
+	"name": "ds_sql_gold_facts_sales",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sql_raw_ventas_apple",
@@ -43,7 +43,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
+			"schema": "GOLD",
 			"table": "fact_sales"
 		}
 	}

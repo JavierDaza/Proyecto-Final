@@ -30,7 +30,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
+			"schema": "GOLD",
 			"table": "dim_product"
 		}
 	}
