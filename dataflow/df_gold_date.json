@@ -53,6 +53,9 @@
 				},
 				{
 					"name": "cast2"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -110,15 +113,18 @@
 				"          CLAIM_DATE as date 'yyyy-MM-dd'",
 				"     ),",
 				"     errors: true) ~> cast2",
-				"union1 sink(allowSchemaDrift: true,",
+				"union1 select(mapColumn(",
+				"          SALE_DATE",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          date_id as date,",
-				"          full_date as date,",
-				"          day as integer,",
+				"          year as integer,",
 				"          month as integer,",
-				"          quarter as integer,",
-				"          year as integer",
+				"          day as integer",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -127,7 +133,10 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          date_id = SALE_DATE",
+				"     )) ~> sink1"
 			]
 		}
 	}

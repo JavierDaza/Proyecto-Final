@@ -16,11 +16,7 @@
 				"type": "date"
 			},
 			{
-				"name": "full_date",
-				"type": "date"
-			},
-			{
-				"name": "day",
+				"name": "year",
 				"type": "int",
 				"precision": 10
 			},
@@ -30,12 +26,7 @@
 				"precision": 10
 			},
 			{
-				"name": "quarter",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "year",
+				"name": "day",
 				"type": "int",
 				"precision": 10
 			}

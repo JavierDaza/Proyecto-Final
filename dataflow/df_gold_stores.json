@@ -80,10 +80,7 @@
 				"union1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          CATEGORY_KEY as integer,",
-				"          CATEGORY_ID as string,",
-				"          CATEGORY_NAME as string,",
-				"          EXTRA_NOTE as string",
+				"          store_id as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -92,7 +89,10 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          store_id = STORE_ID",
+				"     )) ~> sink1"
 			]
 		}
 	}

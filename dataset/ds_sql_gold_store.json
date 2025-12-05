@@ -12,21 +12,8 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "CATEGORY_KEY",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "CATEGORY_ID",
-				"type": "nvarchar"
-			},
-			{
-				"name": "CATEGORY_NAME",
-				"type": "nvarchar"
-			},
-			{
-				"name": "EXTRA_NOTE",
-				"type": "nvarchar"
+				"name": "store_id",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
