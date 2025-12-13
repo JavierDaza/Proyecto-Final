@@ -14,21 +14,6 @@
 			{
 				"name": "date_id",
 				"type": "date"
-			},
-			{
-				"name": "year",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "month",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "day",
-				"type": "int",
-				"precision": 10
 			}
 		],
 		"typeProperties": {

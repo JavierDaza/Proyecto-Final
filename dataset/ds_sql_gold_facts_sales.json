@@ -12,10 +12,6 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "sale_id",
-				"type": "varchar"
-			},
-			{
 				"name": "product_id",
 				"type": "varchar"
 			},
@@ -26,20 +22,6 @@
 			{
 				"name": "date_id",
 				"type": "date"
-			},
-			{
-				"name": "warranty_id",
-				"type": "varchar"
-			},
-			{
-				"name": "quantity",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "total_amount",
-				"type": "float",
-				"precision": 15
 			}
 		],
 		"typeProperties": {
