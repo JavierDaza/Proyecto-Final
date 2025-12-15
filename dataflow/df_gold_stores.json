@@ -29,7 +29,10 @@
 					"name": "select1"
 				},
 				{
-					"name": "aggregate1"
+					"name": "window1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -44,16 +47,21 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Stores",
-				"Stores select(mapColumn(",
+				"filter1 select(mapColumn(",
 				"          STORE_ID,",
 				"          STORE_NAME,",
 				"          CITY",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 aggregate(groupBy(STORE_ID),",
-				"     STORE_ID = first(STORE_ID)) ~> aggregate1",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"Stores window(over(STORE_ID,",
+				"          STORE_NAME,",
+				"          CITY,",
+				"          COUNTRY,",
+				"          OPENED),",
+				"     Ranking = rowNumber()) ~> window1",
+				"window1 filter(Ranking == 1) ~> filter1",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          STORE_ID as string,",
@@ -67,7 +75,12 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          STORE_ID,",
+				"          STORE_NAME,",
+				"          CITY",
+				"     )) ~> sink1"
 			]
 		}
 	}
