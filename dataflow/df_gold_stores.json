@@ -42,7 +42,6 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Stores",
 				"Stores select(mapColumn(",
-				"          STORE_ID,",
 				"          STORE_NAME,",
 				"          CITY",
 				"     ),",
@@ -64,7 +63,6 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          STORE_ID,",
 				"          STORE_NAME,",
 				"          CITY",
 				"     )) ~> sink1"
