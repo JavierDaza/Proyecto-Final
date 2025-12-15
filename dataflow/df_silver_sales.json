@@ -27,6 +27,9 @@
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "cast1"
 				}
 			],
 			"scriptLines": [
@@ -47,7 +50,11 @@
 				"    toDate(trim(sale_date), 'yyyy-MM-dd'), \r",
 				"    toDate(trim(sale_date), 'dd/MM/yyyy'),  \r",
 				"    toDate('1900-01-01', 'yyyy-MM-dd'))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"derivedColumn1 cast(output(",
+				"          quantity as integer",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          SALE_ID as string,",

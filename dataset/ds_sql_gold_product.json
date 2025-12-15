@@ -12,13 +12,27 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "product_id",
-				"type": "varchar"
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRICE",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
 			}
 		],
 		"typeProperties": {
 			"schema": "GOLD",
-			"table": "dim_product"
+			"table": "DIM_PRODUCTOS"
 		}
 	}
 }

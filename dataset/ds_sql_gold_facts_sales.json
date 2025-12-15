@@ -12,21 +12,45 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "product_id",
-				"type": "varchar"
+				"name": "ID_REGISTRO",
+				"type": "int",
+				"precision": 10
 			},
 			{
-				"name": "store_id",
-				"type": "varchar"
+				"name": "SALE_ID",
+				"type": "nvarchar"
 			},
 			{
-				"name": "date_id",
+				"name": "PRODUCT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DATE_ID",
 				"type": "date"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TOTAL_AMOUNT",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 2
+			},
+			{
+				"name": "WARRANTY_ID",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "GOLD",
-			"table": "fact_sales"
+			"table": "FACT_VENTAS_CONSOLIDADA"
 		}
 	}
 }

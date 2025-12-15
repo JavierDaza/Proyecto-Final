@@ -12,13 +12,21 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "store_id",
-				"type": "varchar"
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CITY",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "GOLD",
-			"table": "dim_store"
+			"table": "DIM_TIENDAS"
 		}
 	}
 }
