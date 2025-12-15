@@ -1,0 +1,64 @@
+{
+	"name": "df_gold_facts_sales",
+	"properties": {
+		"folder": {
+			"name": "Gold"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_gold_sales",
+						"type": "DatasetReference"
+					},
+					"name": "Sales"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_gold_facts_sales",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          SALE_ID as string,",
+				"          QUANTITY as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Sales",
+				"Sales sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ID_REGISTRO as integer,",
+				"          SALE_ID as string,",
+				"          PRODUCT_ID as string,",
+				"          PRODUCT_NAME as string,",
+				"          CATEGORY_NAME as string,",
+				"          PRICE as decimal(12,2),",
+				"          STORE_NAME as string,",
+				"          CITY as string,",
+				"          DATE_ID as date,",
+				"          QUANTITY as integer,",
+				"          WARRANTY_ID as string,",
+				"          WARRANTY_TYPE as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
