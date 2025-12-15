@@ -13,13 +13,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "Stores"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_sql_silver_sales",
-						"type": "DatasetReference"
-					},
-					"name": "Sales"
 				}
 			],
 			"sinks": [
@@ -34,12 +27,6 @@
 			"transformations": [
 				{
 					"name": "select1"
-				},
-				{
-					"name": "select2"
-				},
-				{
-					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -54,30 +41,14 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Stores",
-				"source(output(",
-				"          SALE_ID as string,",
-				"          PRODUCT_ID as string,",
-				"          STORE_ID as string,",
-				"          SALE_DATE as date,",
-				"          QUANTITY as integer,",
-				"          REVENUE as decimal(14,2)",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Sales",
 				"Stores select(mapColumn(",
-				"          STORE_ID",
+				"          STORE_ID,",
+				"          STORE_NAME,",
+				"          CITY",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"Sales select(mapColumn(",
-				"          STORE_ID",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select1, select2 union(byName: true)~> union1",
-				"union1 sink(allowSchemaDrift: true,",
+				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          STORE_ID as string,",
@@ -91,10 +62,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          store_id = STORE_ID",
-				"     )) ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}

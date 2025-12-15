@@ -1,5 +1,5 @@
 {
-	"name": "df_gold_product",
+	"name": "df_gold_warranty",
 	"properties": {
 		"folder": {
 			"name": "Gold"
@@ -9,16 +9,16 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_silver_products",
+						"referenceName": "ds_sql_silver_warranty",
 						"type": "DatasetReference"
 					},
-					"name": "Products"
+					"name": "source1"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_gold_product",
+						"referenceName": "ds_sql_gold_warranty",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -31,32 +31,27 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          PRODUCT_ID as string,",
-				"          PRODUCT_NAME as string,",
-				"          CATEGORY_ID as string,",
-				"          LAUNCH_DATE as date,",
-				"          PRICE as decimal(12,2),",
-				"          NOTES as string",
+				"          CLAIM_ID as string,",
+				"          CLAIM_DATE as string,",
+				"          SALE_ID as string,",
+				"          REPAIR_STATUS as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Products",
-				"Products select(mapColumn(",
-				"          PRODUCT_ID,",
-				"          PRODUCT_NAME,",
-				"          CATEGORY_ID,",
-				"          PRICE",
+				"     format: 'table') ~> source1",
+				"source1 select(mapColumn(",
+				"          CLAIM_ID,",
+				"          REPAIR_STATUS",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          PRODUCT_ID as string,",
-				"          PRODUCT_NAME as string,",
-				"          CATEGORY_NAME as string,",
-				"          PRICE as decimal(12,2)",
+				"          warranty_id as string,",
+				"          warranty_type as string,",
+				"          duration_months as integer",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -67,10 +62,8 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          PRODUCT_ID,",
-				"          PRODUCT_NAME,",
-				"          CATEGORY_NAME = CATEGORY_ID,",
-				"          PRICE",
+				"          warranty_id = CLAIM_ID,",
+				"          warranty_type = REPAIR_STATUS",
 				"     )) ~> sink1"
 			]
 		}
