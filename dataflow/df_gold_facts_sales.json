@@ -9,10 +9,10 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_gold_date",
+						"referenceName": "ds_sql_gold_sales",
 						"type": "DatasetReference"
 					},
-					"name": "Date"
+					"name": "Sales"
 				},
 				{
 					"dataset": {
@@ -23,10 +23,10 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_sql_gold_sales",
+						"referenceName": "ds_sql_gold_date",
 						"type": "DatasetReference"
 					},
-					"name": "Sales"
+					"name": "Date"
 				},
 				{
 					"dataset": {
@@ -95,12 +95,13 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          date_id as date",
+				"          SALE_ID as string,",
+				"          QUANTITY as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Date",
+				"     format: 'table') ~> Sales",
 				"source(output(",
 				"          PRODUCT_ID as string,",
 				"          PRODUCT_NAME as string,",
@@ -112,13 +113,12 @@
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Product",
 				"source(output(",
-				"          SALE_ID as string,",
-				"          QUANTITY as integer",
+				"          date_id as date",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> Sales",
+				"     format: 'table') ~> Date",
 				"source(output(",
 				"          STORE_NAME as string,",
 				"          CITY as string",
@@ -136,13 +136,13 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Warranty",
-				"Date keyGenerate(output(ID_1 as long),",
+				"Sales keyGenerate(output(ID_1 as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"Product keyGenerate(output(ID_2 as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey2",
-				"Sales keyGenerate(output(ID_3 as long),",
+				"Date keyGenerate(output(ID_3 as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey3",
 				"Stores keyGenerate(output(ID_4 as long),",
