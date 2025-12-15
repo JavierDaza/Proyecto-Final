@@ -152,7 +152,6 @@
 				"          ID_REGISTRO as integer,",
 				"          SALE_ID as string,",
 				"          PRODUCT_ID as string,",
-				"          STORE_ID as string,",
 				"          DATE_ID as date,",
 				"          QUANTITY as integer,",
 				"          TOTAL_AMOUNT as decimal(12,2),",

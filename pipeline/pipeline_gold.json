@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "NonQuery",
-							"text": "DELETE FROM GOLD.dim_date\nSELECT DISTINCT * FROM GOLD.DIM_TIENDAS\nDELETE FROM GOLD.DIM_PRODUCTOS\nDELETE FROM GOLD.dim_warranty"
+							"text": "DELETE FROM GOLD.dim_date\nDELETE FROM GOLD.DIM_TIENDAS\nDELETE FROM GOLD.DIM_PRODUCTOS\nDELETE FROM GOLD.dim_warranty"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"

@@ -12,10 +12,6 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "STORE_ID",
-				"type": "nvarchar"
-			},
-			{
 				"name": "STORE_NAME",
 				"type": "nvarchar"
 			},

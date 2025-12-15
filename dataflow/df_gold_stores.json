@@ -50,7 +50,6 @@
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          STORE_ID as string,",
 				"          STORE_NAME as string,",
 				"          CITY as string",
 				"     ),",

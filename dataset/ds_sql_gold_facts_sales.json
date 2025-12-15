@@ -25,10 +25,6 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "STORE_ID",
-				"type": "nvarchar"
-			},
-			{
 				"name": "DATE_ID",
 				"type": "date"
 			},
