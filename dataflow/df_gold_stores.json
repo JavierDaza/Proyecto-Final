@@ -27,12 +27,6 @@
 			"transformations": [
 				{
 					"name": "select1"
-				},
-				{
-					"name": "window1"
-				},
-				{
-					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -47,20 +41,13 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> Stores",
-				"filter1 select(mapColumn(",
+				"Stores select(mapColumn(",
 				"          STORE_ID,",
 				"          STORE_NAME,",
 				"          CITY",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"Stores window(over(STORE_ID,",
-				"          STORE_NAME,",
-				"          CITY,",
-				"          COUNTRY,",
-				"          OPENED),",
-				"     Ranking = rowNumber()) ~> window1",
-				"window1 filter(Ranking == 1) ~> filter1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
