@@ -18,11 +18,6 @@
 			{
 				"name": "warranty_type",
 				"type": "varchar"
-			},
-			{
-				"name": "duration_months",
-				"type": "int",
-				"precision": 10
 			}
 		],
 		"typeProperties": {
