@@ -91,6 +91,10 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "MapDrifted1",
+					"description": "Crea una asignación explícita para cada columna de desfase."
 				}
 			],
 			"scriptLines": [
@@ -130,8 +134,7 @@
 				"     format: 'table') ~> Store",
 				"source(output(",
 				"          warranty_id as string,",
-				"          warranty_type as string,",
-				"          duration_months as integer",
+				"          warranty_type as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -181,7 +184,7 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join4",
-				"join4 select(mapColumn(",
+				"MapDrifted1 select(mapColumn(",
 				"          SALE_ID,",
 				"          QUANTITY,",
 				"          date_id,",
@@ -192,10 +195,12 @@
 				"          STORE_NAME,",
 				"          CITY,",
 				"          warranty_id,",
-				"          warranty_type",
+				"          warranty_type,",
+				"          STORE_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
+				"join4 derive(STORE_ID = toString(byName('STORE_ID'))) ~> MapDrifted1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -204,6 +209,7 @@
 				"          PRODUCT_ID as string,",
 				"          PRODUCT_NAME as string,",
 				"          CATEGORY_NAME as string,",
+				"          STORE_ID as string,",
 				"          PRICE as decimal(12,2),",
 				"          STORE_NAME as string,",
 				"          CITY as string,",
@@ -221,6 +227,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
+				"          STORE_ID,",
 				"          SALE_ID,",
 				"          PRODUCT_ID,",
 				"          PRODUCT_NAME,",

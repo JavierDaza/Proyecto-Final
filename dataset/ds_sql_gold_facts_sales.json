@@ -33,6 +33,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
 				"name": "PRICE",
 				"type": "decimal",
 				"precision": 12,
