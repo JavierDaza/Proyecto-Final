@@ -59,7 +59,11 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          warranty_id = CLAIM_ID,",
+				"          warranty_type = REPAIR_STATUS",
+				"     )) ~> sink1"
 			]
 		}
 	}
