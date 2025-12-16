@@ -12,11 +12,6 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "ID_REGISTRO",
-				"type": "int",
-				"precision": 10
-			},
-			{
 				"name": "SALE_ID",
 				"type": "nvarchar"
 			},
@@ -30,10 +25,6 @@
 			},
 			{
 				"name": "CATEGORY_NAME",
-				"type": "nvarchar"
-			},
-			{
-				"name": "STORE_ID",
 				"type": "nvarchar"
 			},
 			{
