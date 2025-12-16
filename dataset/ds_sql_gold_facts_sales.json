@@ -16,10 +16,6 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "PRODUCT_ID",
-				"type": "nvarchar"
-			},
-			{
 				"name": "PRODUCT_NAME",
 				"type": "nvarchar"
 			},

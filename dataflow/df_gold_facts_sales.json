@@ -213,7 +213,6 @@
 				"     validateSchema: false,",
 				"     input(",
 				"          SALE_ID as string,",
-				"          PRODUCT_ID as string,",
 				"          PRODUCT_NAME as string,",
 				"          CATEGORY_NAME as string,",
 				"          PRICE as decimal(12,2),",
