@@ -16,6 +16,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
 				"name": "QUANTITY",
 				"type": "int",
 				"precision": 10
