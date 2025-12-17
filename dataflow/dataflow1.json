@@ -1,0 +1,62 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"folder": {
+			"name": "Gold"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_sql_gold_date",
+						"type": "DatasetReference"
+					},
+					"name": "Date"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_sql_gold_sales",
+						"type": "DatasetReference"
+					},
+					"name": "Sales"
+				},
+				{
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "lookup1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          date_id as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Date",
+				"source(output(",
+				"          SALE_ID as string,",
+				"          STORE_ID as string,",
+				"          SALE_DATE as date,",
+				"          PRODUCT_ID as string,",
+				"          QUANTITY as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Sales",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
+				"Sales, Date lookup(SALE_DATE == date_id,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1"
+			]
+		}
+	}
+}

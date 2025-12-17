@@ -119,6 +119,9 @@
 			"scriptLines": [
 				"source(output(",
 				"          SALE_ID as string,",
+				"          STORE_ID as string,",
+				"          SALE_DATE as date,",
+				"          PRODUCT_ID as string,",
 				"          QUANTITY as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
