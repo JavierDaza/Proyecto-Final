@@ -18,6 +18,10 @@
 			{
 				"name": "CITY",
 				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {

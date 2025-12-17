@@ -42,6 +42,7 @@
 				"     format: 'table') ~> source1",
 				"source1 select(mapColumn(",
 				"          CLAIM_ID,",
+				"          SALE_ID,",
 				"          REPAIR_STATUS",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -50,7 +51,8 @@
 				"     validateSchema: false,",
 				"     input(",
 				"          warranty_id as string,",
-				"          warranty_type as string",
+				"          warranty_type as string,",
+				"          SALE_ID as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -62,7 +64,8 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          warranty_id = CLAIM_ID,",
-				"          warranty_type = REPAIR_STATUS",
+				"          warranty_type = REPAIR_STATUS,",
+				"          SALE_ID",
 				"     )) ~> sink1"
 			]
 		}

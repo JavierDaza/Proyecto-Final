@@ -18,6 +18,10 @@
 			{
 				"name": "warranty_type",
 				"type": "varchar"
+			},
+			{
+				"name": "SALE_ID",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {

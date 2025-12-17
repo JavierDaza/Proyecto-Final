@@ -41,7 +41,8 @@
 				"     validateSchema: false,",
 				"     input(",
 				"          STORE_NAME as string,",
-				"          CITY as string",
+				"          CITY as string,",
+				"          STORE_ID as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -53,7 +54,8 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          STORE_NAME,",
-				"          CITY",
+				"          CITY,",
+				"          STORE_ID",
 				"     )) ~> sink1"
 			]
 		}
